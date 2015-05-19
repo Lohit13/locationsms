@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<body>
+		Latidude: <input id="lat"/><br>
+		Longitude: <input id="lon"/>
+	</body>
+	<script>
+	window.onload = function() {
+	var startPos;
+	var lat,lon;
+	var geoSuccess = function(position) {
+		startPos = position;
+		document.getElementById('lat').value = startPos.coords.latitude;
+		lat=String(startPos.coords.latitude);
+		document.getElementById('lon').value = startPos.coords.longitude;
+		lon=String(startPos.coords.longitude);
+		return lat;
+	};
+	navigator.geolocation.getCurrentPosition(geoSuccess);
+
+	function msg(){
+		lat=document.getElementById('lat').value;
+		lon=document.getElementById('lon').value;
+		console.log(lat);
+		console.log(lon);
+
+		var ini="/msg/";
+		var sep="l";
+		var url=ini.concat(lat);
+		url = url.concat(sep);
+		url = url.concat(lon);
+		console.log(url);
+		window.open(url,"_self");
+	}
+
+	setTimeout(msg, 5000);
+
+	};
+	</script>
+</html>
